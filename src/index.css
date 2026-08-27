@@ -24,18 +24,8 @@ body {
   display: none;
 }
 
-@keyframes kara-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: kara-marquee 32s linear infinite;
-}
-.marquee-track:hover .animate-marquee {
-  animation-play-state: paused;
+/* Marquee animation is now handled by JavaScript in App.tsx
+   to properly maintain position when tab visibility changes */
+.marquee-track {
+  user-select: none;
 }
