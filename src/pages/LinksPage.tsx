@@ -222,7 +222,7 @@ export default function LinksPage() {
       <main className="mx-auto flex w-full max-w-[560px] flex-col px-5 pb-16 pt-10 sm:pt-14">
         {/* Logo */}
         <div className="flex justify-center">
-          <div className="grid h-24 w-24 place-items-center rounded-3xl bg-white p-2 shadow-[0_6px_24px_rgba(27,34,11,0.12)] ring-1 ring-[#dceb3a]/40 sm:h-28 sm:w-28">
+          <div className="grid h-24 w-24 place-items-center overflow-hidden rounded-3xl bg-white shadow-[0_6px_24px_rgba(27,34,11,0.12)] ring-1 ring-[#dceb3a]/40 sm:h-28 sm:w-28">
             <img src={logo} alt="Kara Bottles chrome logo" className="h-full w-full object-contain" />
           </div>
         </div>
