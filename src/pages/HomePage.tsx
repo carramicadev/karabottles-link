@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import logo from "@/imports/LOGO.png";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  // Track PageView when HomePage loads
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'ViewContent', {
+        content_name: 'Home Page',
+        content_category: 'Page View',
+        page_url: '/',
+      });
+    }
+  }, []);
   return (
     <div className="min-h-full w-full bg-[#0a0a0a] text-white overflow-hidden relative">
       {/* Animated background gradient */}

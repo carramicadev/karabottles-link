@@ -1,8 +1,8 @@
 import logo from "@/imports/LOGO.png";
-import img1 from "@/imports/DSC06210.JPG";
-import img2 from "@/imports/DSC06150.JPG";
-import img3 from "@/imports/DSC05610.JPG";
-import img4 from "@/imports/DSC06177.JPG";
+import img1 from "@/imports/DSC06210.jpg";
+import img2 from "@/imports/DSC06150.jpg";
+import img3 from "@/imports/DSC05610.jpg";
+import img4 from "@/imports/DSC06177.jpg";
 import { useEffect, useRef } from "react";
 
 function WhatsAppIcon() {
@@ -48,6 +48,7 @@ type LinkItem = {
   href: string;
   icon: React.ReactNode;
   featured?: boolean;
+  eventName?: string;
 };
 
 const LINKS: LinkItem[] = [
@@ -57,24 +58,28 @@ const LINKS: LinkItem[] = [
     href: "https://carramica.com/_/cs/rotate?group=1730371362232&text=hai%20micaa..",
     icon: <WhatsAppIcon />,
     featured: true,
+    eventName: "WhatsApp",
   },
   {
     label: "Shopee",
     sub: "shopee.co.id/karabottles",
     href: "https://shopee.co.id/karabottles",
     icon: <ShopeeIcon />,
+    eventName: "Shopee",
   },
   {
     label: "Tokopedia",
     sub: "tokopedia.com/kara-bottles",
     href: "https://www.tokopedia.com/kara-bottles",
     icon: <TokopediaIcon />,
+    eventName: "Tokopedia",
   },
   {
     label: "Offline Store — Maps",
     sub: "Visit us in person",
     href: "https://share.google/ilV2m1xpwnvSa9lg0",
     icon: <MapPinIcon />,
+    eventName: "OfflineStore",
   },
 ];
 
@@ -86,18 +91,29 @@ const GALLERY = [
 ];
 
 function LinkButton({ item }: { item: LinkItem }) {
+  const handleClick = () => {
+    // Track Meta Pixel event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('trackCustom', item.eventName || 'LinkClick', {
+        content_name: item.label,
+        content_category: 'Link',
+      });
+    }
+  };
+
   return (
     <a
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handleClick}
       className={[
         "group flex items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-200",
-        "shadow-[0_2px_0_rgba(0,0,0,0.25)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.28)]",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#cdd92c] focus-visible:ring-[#1b220b]",
+        "shadow-[0_2px_0_rgba(45,42,38,0.2)] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(45,42,38,0.2)]",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#FDF8F3] focus-visible:ring-[#1b220b]",
         item.featured
           ? "bg-[#1b220b] text-[#dceb3a] ring-1 ring-[#dceb3a]/30"
-          : "bg-[#1b220b] text-[#f3f6e2]",
+          : "bg-[#1b220b] text-[#FDF8F3]",
       ].join(" ")}
     >
       <span
@@ -124,6 +140,17 @@ function LinkButton({ item }: { item: LinkItem }) {
 export default function LinksPage() {
   const loop = [...GALLERY, ...GALLERY];
   const marqueeRef = useRef<HTMLDivElement>(null);
+
+  // Track PageView when LinksPage loads
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'ViewContent', {
+        content_name: 'Links Page',
+        content_category: 'Page View',
+        page_url: '/links',
+      });
+    }
+  }, []);
 
   // Handle tab visibility to maintain animation position
   useEffect(() => {
@@ -191,11 +218,11 @@ export default function LinksPage() {
   }, []);
 
   return (
-    <div className="min-h-full w-full bg-[#cdd92c] text-[#1b220b]">
+    <div className="min-h-full w-full bg-[#FDF8F3] text-[#2D2A26]">
       <main className="mx-auto flex w-full max-w-[560px] flex-col px-5 pb-16 pt-10 sm:pt-14">
         {/* Logo */}
         <div className="flex justify-center">
-          <div className="grid h-24 w-24 place-items-center rounded-3xl bg-white/25 p-2 shadow-[0_6px_24px_rgba(27,34,11,0.18)] ring-1 ring-white/40 backdrop-blur-sm sm:h-28 sm:w-28">
+          <div className="grid h-24 w-24 place-items-center rounded-3xl bg-white p-2 shadow-[0_6px_24px_rgba(27,34,11,0.12)] ring-1 ring-[#dceb3a]/40 sm:h-28 sm:w-28">
             <img src={logo} alt="Kara Bottles chrome logo" className="h-full w-full object-contain" />
           </div>
         </div>
@@ -206,11 +233,11 @@ export default function LinksPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#dceb3a]" />
             Newest Launch
           </span>
-          <h1 className="font-display mt-4 text-[34px] font-extrabold leading-[1.05] tracking-tight sm:text-[42px]">
+          <h1 className="font-display mt-4 text-[34px] font-extrabold leading-[1.05] tracking-tight text-[#1b220b] sm:text-[42px]">
             Kara Bottles
-            <span className="block text-[#3a4a15]">by Carramica</span>
+            <span className="block text-[#5C6B1D]">by Carramica</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-sm text-[14.5px] font-medium leading-relaxed text-[#2a3410]">
+          <p className="mx-auto mt-4 max-w-sm text-[14.5px] font-medium leading-relaxed text-[#6B7280]">
             Buy on WhatsApp &amp; get{" "}
             <span className="rounded-md bg-[#1b220b] px-1.5 py-0.5 font-bold text-[#dceb3a]">
               20% Off
@@ -229,7 +256,7 @@ export default function LinksPage() {
         {/* Carousel */}
         <section className="marquee-track mt-12 -mx-5 overflow-hidden">
           <div className="mb-3 px-5">
-            <h2 className="font-display text-sm font-bold uppercase tracking-[0.18em] text-[#3a4a15]">
+            <h2 className="font-display text-sm font-bold uppercase tracking-[0.18em] text-[#5C6B1D]">
               The Collection
             </h2>
           </div>
@@ -237,7 +264,7 @@ export default function LinksPage() {
             {loop.map((g, i) => (
               <div
                 key={i}
-                className="h-56 w-44 shrink-0 overflow-hidden rounded-2xl bg-[#b9c526] shadow-[0_6px_18px_rgba(27,34,11,0.2)] ring-1 ring-[#1b220b]/10 sm:h-64 sm:w-52"
+                className="h-56 w-44 shrink-0 overflow-hidden rounded-2xl bg-[#E5E1DB] shadow-[0_6px_18px_rgba(27,34,11,0.12)] ring-1 ring-[#1b220b]/10 sm:h-64 sm:w-52"
               >
                 <img src={g.src} alt={g.alt} className="h-full w-full object-cover" />
               </div>
@@ -247,8 +274,8 @@ export default function LinksPage() {
 
         {/* Footer */}
         <footer className="mt-14 text-center">
-          <div className="mx-auto mb-3 h-px w-16 bg-[#1b220b]/20" />
-          <p className="text-[12px] font-medium text-[#2a3410]/80">
+          <div className="mx-auto mb-3 h-px w-16 bg-[#2D2A26]/10" />
+          <p className="text-[12px] font-medium text-[#9CA3AF]">
             © 2026 PT Carramica Kreasi Indonesia
           </p>
         </footer>
