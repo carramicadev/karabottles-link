@@ -1,0 +1,10 @@
+{
+  "description": "Showcase essential links for Kara Bottles with an elegant, responsive design featuring buttons for WhatsApp, Shopee, and Tokopedia, plus a carousel of product images.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
