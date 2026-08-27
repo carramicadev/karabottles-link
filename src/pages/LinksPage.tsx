@@ -1,8 +1,8 @@
 import logo from "@/imports/LOGO.png";
-import img1 from "@/imports/DSC06210.jpg";
-import img2 from "@/imports/DSC06150.jpg";
-import img3 from "@/imports/DSC05610.jpg";
-import img4 from "@/imports/DSC06177.jpg";
+import img1 from "@/imports/DSC06210.JPG";
+import img2 from "@/imports/DSC06150.JPG";
+import img3 from "@/imports/DSC05610.JPG";
+import img4 from "@/imports/DSC06177.JPG";
 import { useEffect, useRef } from "react";
 
 function WhatsAppIcon() {
